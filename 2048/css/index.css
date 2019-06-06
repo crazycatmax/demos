@@ -1,0 +1,79 @@
+*{
+	padding: 0;
+	margin: 0;
+}
+body{
+	background: radial-gradient(at center 36%,#555,#000);
+	height: 800px;
+	overflow: hidden;
+}
+.name{
+	position: relative;
+	width: 400px;
+	margin: 30px auto 0;
+	text-align: center;
+}
+.name>h1{
+	/*transition: all 1s 0.3s ease;*/
+	color: yellow;
+	opacity: 0.8;
+}
+@keyframes title{
+	0%{}
+	50%{
+		opacity:0.5;
+		transform: rotate3d(0,1,0,-2turn) scale(1.5);
+	}
+	100%{}
+}
+.animation{
+	animation: ease 2s 0.5s title 2;
+}
+/*		body:hover h1{
+	transform: rotate3d(0,1,0,-1turn) scale(3);
+	color: pink;
+}*/
+.box{
+	width: 400px;
+	height: 400px;
+	background-color: grey;
+	border: 3px solid grey;
+	margin: 20px auto;
+	position: relative;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-content: space-between;
+}
+li{
+	width: 24%;
+	height: 24%;
+	margin: 2px;
+	background-color: orange;
+	list-style: none;
+	text-align: center;
+	font: bolder 40px/98px 'microsoft yahei';
+	color: #555;
+	transition: all 0.5s 0s ease-out;
+}
+@keyframes db{
+	0%{}
+	50%{
+		transform: scale(1.5);
+		opacity: 0;
+	}
+	100%{}
+}
+.animation-db{
+	animation: ease 1s 0s db 1;
+}
+span{
+	display: block;
+	width: 400px;
+	margin: 0 auto;
+	font: bolder 24px/30px 'microsoft yahei';
+	color: silver;
+}
+.record{
+	color: orange;
+}
