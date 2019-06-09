@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>百叶窗特效</title>
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <!-- <link rel="stylesheet/less" type="text/css" href="less/index.less"> -->
+</head>
+
+<body>
+    <div class="box" id="box">
+        <!-- 4*4 -->
+        <ul class="ul" id="ul">
+            <img src="img/1.jpg" alt="" class="img" id="img">
+            <li class="li" id="li0">
+                <img src="img/2.jpg" alt="" class="li-img">
+            </li>
+        </ul>
+    </div>
+
+    <button class="btn" id="btn">click me!</button>
+
+    <select name="sel" id="sel" class="sel">
+        <option class="optionStyle" value="-1" selected="selected">随机</option>
+        <option class="optionStyle" value="0">样式0 &nbsp;==>&nbsp;↓渐变</option>
+        <option class="optionStyle" value="1">样式1 &nbsp;==>&nbsp;→渐变</option>
+        <option class="optionStyle" value="2">样式2 &nbsp;==>&nbsp;↓逐行扫描</option>
+        <option class="optionStyle" value="3">样式3 &nbsp;==>&nbsp;→逐列扫描</option>
+        <option class="optionStyle" value="4">样式4 &nbsp;==>&nbsp;↘渐变</option>
+        <option class="optionStyle" value="5">样式5 &nbsp;==>&nbsp;←逐行扫描</option>
+        <option class="optionStyle" value="6">样式6 &nbsp;==>&nbsp;↑逐行扫描</option>
+        <option class="optionStyle" value="7">样式7 &nbsp;==>&nbsp;↓S型逐行扫描</option>
+        <option class="optionStyle" value="8">样式8 &nbsp;==>&nbsp;→S型逐行扫描</option>
+        <option class="optionStyle" value="9">样式9 &nbsp;==>&nbsp;S形向内逐行扫描</option>
+        <option class="optionStyle" value="10">样式10&nbsp;==>&nbsp;S形向外逐行扫描</option>
+        <option class="optionStyle" value="11">样式11&nbsp;==>&nbsp;回形向内</option>
+        <option class="optionStyle" value="12">样式12&nbsp;==>&nbsp;回形向内</option>
+        <option class="optionStyle" value="13">样式13&nbsp;==>&nbsp;两端向内横向逐行扫描</option>
+        <option class="optionStyle" value="14">样式14&nbsp;==>&nbsp;两端向外横向逐行扫描</option>
+        <option class="optionStyle" value="15">样式15&nbsp;==>&nbsp;两端向内纵向逐行扫描</option>
+        <option class="optionStyle" value="16">样式16&nbsp;==>&nbsp;两端向外纵向逐行扫描</option>
+        <option class="optionStyle" value="17">样式17&nbsp;==>&nbsp;百叶窗横向</option>
+        <option class="optionStyle" value="18">样式18&nbsp;==>&nbsp;百叶窗纵向</option>
+        <option class="optionStyle" value="19">样式19&nbsp;==>&nbsp;未知样式</option>
+        <option class="optionStyle" value="20">样式20&nbsp;==>&nbsp;图片碎片随机出现</option>
+    </select>
+
+    <div class="size">
+        <p>
+        <label for="row">row</label>
+        <input type="text" class="in" id="row" value="8">
+        <span></span>
+        </p>
+        <p>
+        <label for="size2">column</label>
+        <input type="column" class="in" id="column" value="16">
+        <span></span>
+        </p>
+    </div>
+</body>
+
+<!-- <script src="js/less.min.js"></script> -->
+<script src="js/index.js"></script>
+</html>
