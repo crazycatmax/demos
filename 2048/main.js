@@ -1,10 +1,10 @@
 //配置文件
 require.config({
-	baseUrl:'js'
+	baseUrl: 'js'
 });
 
-require(['listen','tools','start'],function(listen,tools,start){
-	var game={};
+require(['listen', 'tools', 'start'], function (listen, tools, start) {
+	const game = {};
 
 	//初始化游戏
 	start.init(game);

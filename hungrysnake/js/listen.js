@@ -1,8 +1,8 @@
-define(['gamestate'], function(state) {
+define(['gamestate'], function (state) {
 	function foo(o) {
 		//给页面添加键盘监听器
-		document.addEventListener('keydown', function(event) {
-			var event = event || window.event;
+		document.addEventListener('keydown', function (event) {
+			let event = event || window.event;
 			// console.log(event.keyCode);
 			if (!o.timerFlag && event.keyCode != 80 && event.keyCode != 83 && event.keyCode != 69) {
 				return;
@@ -39,13 +39,13 @@ define(['gamestate'], function(state) {
 					state.gamePause(o) && state.gameInit(o);
 					break;
 				case 187: //+ 加速
-					if(o.timerFlag && state.gamePause(o)){
+					if (o.timerFlag && state.gamePause(o)) {
 						o.timerDis = o.timerDis / 2;
 						state.gamePlaying(o);
 					}
 					break;
 				case 189: //- 减速
-					if(o.timerFlag && state.gamePause(o)){
+					if (o.timerFlag && state.gamePause(o)) {
 						o.timerDis = o.timerDis * 2;
 						state.gamePlaying(o);
 					}

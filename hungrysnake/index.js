@@ -1,4 +1,4 @@
- var box = document.querySelector('.box'),
+ let box = document.querySelector('.box'),
      head = document.querySelector('.head'),
      mode = document.querySelector('.mode'),
      foodInit = document.querySelector('.food'), //初始食物
@@ -22,8 +22,8 @@
              y: 0
          },
          //向前移动一步
-         move: function() {
-             var i = 0;
+         move: function () {
+             let i = 0;
 
              //保存蛇尾巴的位置,如果蛇吃到食物，则食物添加到此位置
              snake.lastFoot.x = getStyle(this.parts[this.parts.length - 1], 'left');
@@ -82,7 +82,7 @@
          },
 
          //蛇吃到食物时，身体增长一格,化食物为身体
-         eat: function(food) {
+         eat: function (food) {
              if (getStyle(this.head, 'left') == getStyle(food, 'left') && getStyle(this.head, 'top') == getStyle(food, 'top')) {
                  this.parts.push(food);
 
@@ -95,8 +95,8 @@
      }
 
  //给页面添加键盘监听器
- document.addEventListener('keydown', function(event) {
-     var event = event || window.event;
+ document.addEventListener('keydown', function (event) {
+     let event = event || window.event;
      // console.log(event.keyCode);
      if (!timerFlag && event.keyCode != 80 && event.keyCode != 83 && event.keyCode != 69) {
          return;
@@ -151,7 +151,7 @@
  //游戏运行
  function gamePlaying(timerDis) {
      timerFlag = true;
-     timer = setInterval(function() {
+     timer = setInterval(function () {
          snake.move();
      }, timerDis);
      return true;
@@ -172,7 +172,7 @@
      box.children[0].style.top = '';
 
      //还原首个食物位置
-     // var foodOrigin = box.children[1];
+     // let foodOrigin = box.children[1];
      box.children[1].style.left = '';
      box.children[1].style.top = '';
 
@@ -187,7 +187,7 @@
 
      //删除蛇身体只保留头部
      snake.parts.length = 1;
-     for (var i = box.children.length - 1; i > 1; i--) {
+     for (let i = box.children.length - 1; i > 1; i--) {
          box.removeChild(box.children[i]);
      }
 
@@ -196,9 +196,9 @@
 
  //随机生成食物 盒子宽高=>600*400 食物宽高=>20
  function foodRandom() {
-     var leftRand = parseInt(Math.random() * (box.offsetWidth / snake.width)) * snake.width;
-     var topRand = parseInt(Math.random() * (box.offsetHeight / snake.width)) * snake.width;
-     var newFood = foodInit.cloneNode();
+     let leftRand = parseInt(Math.random() * (box.offsetWidth / snake.width)) * snake.width;
+     let topRand = parseInt(Math.random() * (box.offsetHeight / snake.width)) * snake.width;
+     let newFood = foodInit.cloneNode();
      newFood.style.left = leftRand + 'px';
      newFood.style.top = topRand + 'px';
      newFood.style.opacity = 1 - snake.parts.length / 100;
@@ -208,10 +208,10 @@
 
  //头部是否碰撞自己
  function whetherCrashSelf(snake) {
-     var parts = snake.parts;
-     var head = parts[0];
-     var flag = false; //默认没有碰撞自己
-     for (var i = 1; i < parts.length; i++) {
+     let parts = snake.parts;
+     let head = parts[0];
+     let flag = false; //默认没有碰撞自己
+     for (let i = 1; i < parts.length; i++) {
          if (head.style.left == parts[i].style.left && head.style.top == parts[i].style.top) {
              flag = true;
              break;
@@ -222,15 +222,18 @@
 
  //头部是否出界
  function whetherCrashBoundry(snake) {
-     var flag = false; //默认没有出界
+     let flag = false; //默认没有出界
      //碰到右边界
      if ((parseInt(getStyle(snake.parts[0], 'left')) > box.offsetWidth - snake.width)
          //碰到左边界
-         || (parseInt(getStyle(snake.parts[0], 'left')) < 0)
+         ||
+         (parseInt(getStyle(snake.parts[0], 'left')) < 0)
          //碰到下边界
-         || (parseInt(getStyle(snake.parts[0], 'top')) > box.offsetHeight - snake.width)
+         ||
+         (parseInt(getStyle(snake.parts[0], 'top')) > box.offsetHeight - snake.width)
          //碰到上边界
-         || (parseInt(getStyle(snake.parts[0], 'top')) < 0)) {
+         ||
+         (parseInt(getStyle(snake.parts[0], 'top')) < 0)) {
          flag = true;
      }
      return flag;
