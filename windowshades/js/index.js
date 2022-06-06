@@ -1,5 +1,4 @@
-
-var ul = $('box').children[0],
+let ul = $('box').children[0],
     m = 8, //行
     n = 16, //列
     colors = ['red', 'orange', 'yellow', 'green', 'skyblue', 'blue', 'purple'], //标签颜色数组
@@ -13,18 +12,18 @@ initCube(m, n);
 //动态生成小方格
 function initCube(m, n) {
     //先删除原来的小方格，再创建新的！
-    var ulSon = ul.children;
-    var oldLis = [].slice.call(ulSon).slice(2); //上一次创建的小方格
+    let ulSon = ul.children;
+    let oldLis = [].slice.call(ulSon).slice(2); //上一次创建的小方格
     // index--;
 
-    for (var i = 0; i < oldLis.length; i++) {
+    for (let i = 0; i < oldLis.length; i++) {
         ul.removeChild(oldLis[i]);
     }
     //初始化新的小方格
-    for (var i = 0; i < m * n; i++) {
+    for (let i = 0; i < m * n; i++) {
         $('li0').style.width = 800 / n + 'px';
         $('li0').style.height = 500 / m + 'px';
-        var li = $('li0').cloneNode(true);
+        let li = $('li0').cloneNode(true);
         ul.appendChild(li);
         // li.children[0].setAttribute('src','img/2.jpg');
         li.setAttribute('id', 'li' + (i + 1));
@@ -40,13 +39,13 @@ function initCube(m, n) {
     }
     //节流阀初始化
     throttleFlag = [];
-    for (var i = 0; i < m * n; i++) {
+    for (let i = 0; i < m * n; i++) {
         throttleFlag.push(true);
     }
 }
 
 
-$('row').onkeyup = function() {
+$('row').onkeyup = function () {
     if ((/^([1-9]|([12]\d))$/).test(this.value)) {
         m = +this.value;
         initCube(m, n);
@@ -55,7 +54,7 @@ $('row').onkeyup = function() {
         this.nextElementSibling.innerHTML = '请输入1-29的整数';
     }
 }
-$('column').onkeyup = function() {
+$('column').onkeyup = function () {
     if ((/^([1-9]|[1234]\d)$/).test(this.value)) {
         n = +this.value;
         initCube(m, n);
@@ -66,35 +65,35 @@ $('column').onkeyup = function() {
 }
 
 //按钮事件
-$('sel').onmouseenter = function() {
+$('sel').onmouseenter = function () {
     this.style.backgroundColor = '#ccc';
 }
-$('sel').onmouseleave = function() {
+$('sel').onmouseleave = function () {
     this.style.backgroundColor = '#fff';
 }
-$('sel').onchange = function() {
+$('sel').onchange = function () {
     selIndex = +this.value;
     console.log(selIndex);
 }
 //鼠标移入移出事件
-$('btn').onmouseenter = function() {
+$('btn').onmouseenter = function () {
     this.style.backgroundColor = index == -1 ? colors[0] : colors[index % 7];
     this.style.color = '#fff';
     this.style.borderColor = '#fff';
 }
-$('btn').onmouseleave = function() {
+$('btn').onmouseleave = function () {
     this.style.backgroundColor = '#fff';
     this.style.color = index == -1 ? colors[0] : colors[index % 7];;
     this.style.borderColor = index == -1 ? colors[0] : colors[index % 7];;
 }
 //按钮绑定事件
-$('btn').onclick = function() {
+$('btn').onclick = function () {
     if (getAndValue(throttleFlag)) {
-        for (var i = 0; i < throttleFlag.length; i++) { //节流阀初始化,每个小方格节流阀设置为关闭
+        for (let i = 0; i < throttleFlag.length; i++) { //节流阀初始化,每个小方格节流阀设置为关闭
             throttleFlag[i] = false;
         }
-        // for (var i = 0; i < m * n; i++) {//初始化所有方块,根据里层的animate变化样式来初始化数据
-        //     var li = $('li' + (i + 1));
+        // for (let i = 0; i < m * n; i++) {//初始化所有方块,根据里层的animate变化样式来初始化数据
+        //     let li = $('li' + (i + 1));
         //     li.style.opacity = 0;
         // }
         //颜色，样式 根据下标递增
@@ -103,14 +102,14 @@ $('btn').onclick = function() {
         $('btn').style.backgroundColor = colors[index % 7];
 
         //依次给每个方块设置延迟
-        for (var i = 0; i < m * n; i++) {
-            (function(i) { //闭包传参数i
-                var li = $('li' + (i + 1)); //目标方块元素
+        for (let i = 0; i < m * n; i++) {
+            (function (i) { //闭包传参数i
+                let li = $('li' + (i + 1)); //目标方块元素
                 // console.log(li);
-                setTimeout(function() {
+                setTimeout(function () {
                         animate(li, {
                             'opacity': 1.0
-                        }, function() {
+                        }, function () {
                             throttleFlag[i] = true; //打开每个小方格的节流阀
                             if (getAndValue(throttleFlag)) { //如果节流阀全部打开
                                 exchange();
@@ -130,8 +129,8 @@ $('btn').onclick = function() {
             //设置小方块效果结束时的动作，外层大图变为小方格的图
             $('img').setAttribute('src', 'img/' + ((index + 1) % 9 + 1) + '.jpg');
             //小方格变透明,并且切换为下一张图
-            for (var i = 0; i < m * n; i++) {
-                var li = $('li' + (i + 1));
+            for (let i = 0; i < m * n; i++) {
+                let li = $('li' + (i + 1));
                 li.style.opacity = 0;
                 li.children[0].setAttribute('src', 'img/' + ((index + 2) % 9 + 1) + '.jpg');
             }
@@ -145,8 +144,8 @@ function $(id) {
 
 //节流阀数组求与函数
 function getAndValue(arr) {
-    var flag = true;
-    for (var i = 0; i < arr.length; i++) {
+    let flag = true;
+    for (let i = 0; i < arr.length; i++) {
         flag = flag && arr[i];
     }
     return flag;
@@ -154,8 +153,8 @@ function getAndValue(arr) {
 
 //百叶窗养式
 function style(x, y, h, w, styleNum) { //列号，行号，高，宽，样式序号
-    // var dis = 40;//时间间隔系数
-    var dis = 1800 / (m * n); //时间间隔系数
+    // let dis = 40;//时间间隔系数
+    let dis = 1800 / (m * n); //时间间隔系数
     switch (styleNum) {
         case 0:
             return y * dis * 6; //6
@@ -206,18 +205,18 @@ function style(x, y, h, w, styleNum) { //列号，行号，高，宽，样式序
 
 // 列号x，行号y, 高h，宽w，对应求时间延迟基数
 function case7(x, y, h, w) {
-    var up = y; //小方格距离上边的距离
-    var left = x; //距离左边
-    var right = w - 1 - x; //距离右边
-    var down = h - 1 - y; //距离下边
-    var suma = 0; //整圈小盒子求和
-    var sumb = 0; //未形成整圈的小盒子求和
-    var hh = h - 1; //缓存高
-    var ww = w - 1; //缓存宽
+    let up = y; //小方格距离上边的距离
+    let left = x; //距离左边
+    let right = w - 1 - x; //距离右边
+    let down = h - 1 - y; //距离下边
+    let suma = 0; //整圈小盒子求和
+    let sumb = 0; //未形成整圈的小盒子求和
+    let hh = h - 1; //缓存高
+    let ww = w - 1; //缓存宽
 
-    var min = Math.min(up, left, right, down);
+    let min = Math.min(up, left, right, down);
     console.log('up:' + up);
-    for (var i = 0; i < min; i++) { //求suma
+    for (let i = 0; i < min; i++) { //求suma
         suma += hh * 2 + ww * 2;
         hh -= 2;
         ww -= 2;
@@ -245,10 +244,10 @@ function case7(x, y, h, w) {
 }
 
 function case9(x, y, h, w) {
-    var up = y; //小方格距离上边的距离
-    var left = x; //距离左边
-    var right = w - 1 - x; //距离右边
-    var down = h - 1 - y; //距离下边
+    let up = y; //小方格距离上边的距离
+    let left = x; //距离左边
+    let right = w - 1 - x; //距离右边
+    let down = h - 1 - y; //距离下边
     return Math.min(up, left, right, down);
 }
 
@@ -268,10 +267,10 @@ function case13(x, y, h, w) {
     }
 }
 
-var case20 = function(x, y, h, w) {
-    var arr = arr || (function() { //如果数组为空或不存在，重新初始化数组
-        var arr = [];
-        for (var i = 0; i < h * w; i++) {
+let case20 = function (x, y, h, w) {
+    let arr = arr || (function () { //如果数组为空或不存在，重新初始化数组
+        let arr = [];
+        for (let i = 0; i < h * w; i++) {
             arr.push(i);
         }
         return arr;
@@ -281,8 +280,8 @@ var case20 = function(x, y, h, w) {
 
 //删除并返回数组的随机元素
 function removeRandomItem(arr) {
-    var itemIndex = parseInt(Math.random() * arr.length); //随机位置
-    var item = arr[itemIndex]; //随机元素
+    let itemIndex = parseInt(Math.random() * arr.length); //随机位置
+    let item = arr[itemIndex]; //随机元素
     arr.splice(itemIndex, 1);
     return item;
 }
@@ -290,16 +289,16 @@ function removeRandomItem(arr) {
 //把 任意对象 的 任意数值属性 改变为 任意的目标值
 function animate(obj, json, fn) {
     clearInterval(obj.timer);
-    obj.timer = setInterval(function() {
-        var flag = true;
-        for (var k in json) {
+    obj.timer = setInterval(function () {
+        let flag = true;
+        for (let k in json) {
             if (k === "opacity") { //opacity要特殊处理
                 //opacity没有单位 参与运算自动转换成数值 所以不用parsetInt
                 //取值范围 0-1 0.1 0.33 33 为了让以前的计算公式生效 要扩大100倍
-                var leader = getStyle(obj, k) * 100;
-                var target = json[k] * 100;
-                var step = (target - leader) / 10;
-                // var step = (target - leader) / 20;
+                let leader = getStyle(obj, k) * 100;
+                let target = json[k] * 100;
+                let step = (target - leader) / 10;
+                // let step = (target - leader) / 20;
                 step = step > 0 ? Math.ceil(step) : Math.floor(step);
                 leader = leader + step;
                 obj.style[k] = leader / 100; //opacity没有单位
@@ -307,9 +306,9 @@ function animate(obj, json, fn) {
             } else if (k === "zIndex") {
                 obj.style.zIndex = json[k]; //层级不需要渐变 直接设置即可
             } else {
-                var leader = parseInt(getStyle(obj, k)) || 0;
-                var target = json[k];
-                var step = (target - leader) / 20;
+                let leader = parseInt(getStyle(obj, k)) || 0;
+                let target = json[k];
+                let step = (target - leader) / 20;
                 step = step > 0 ? Math.ceil(step) : Math.floor(step);
                 leader = leader + step;
                 obj.style[k] = leader + "px";
@@ -327,5 +326,5 @@ function animate(obj, json, fn) {
 
 //获取DOM对象计算后的属性
 function getStyle(obj, attr) {
-    return window.getComputedStyle?window.getComputedStyle(obj, null)[attr]:obj.currentStyle[attr];
+    return window.getComputedStyle ? window.getComputedStyle(obj, null)[attr] : obj.currentStyle[attr];
 }
