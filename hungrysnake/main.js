@@ -4,7 +4,7 @@ require.config({
 });
 
 require(['start', 'listen'], function (start, listen) {
-	let o = {};
+	const o = {};
 
 	start.init(o); //初始化游戏
 

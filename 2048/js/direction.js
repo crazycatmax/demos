@@ -1,151 +1,157 @@
 define([], function () {
-	function left(obj) {
-		for (let i = 0; i < obj.N; i++) { // 遍历每一行
-			let count = 0;
-			for (let j = 0; j < obj.N - 1 - count; j++) { // 遍历前三列
-				if (obj.p[i][j] == 0) { // 排除空白格子s
-					for (let k = j; k < obj.N - 1 - count; k++) {
-						obj.p[i][k] = obj.p[i][k + 1];
-					}
-					obj.p[i][obj.N - 1 - count] = 0;
-					--j;
-					++count;
-				} else {
-					if (obj.p[i][j] == obj.p[i][j + 1]) {
-						obj.p[i][j] *= 2;
-						obj.score += obj.p[i][j]; //加分
-						for (let k = j + 1; k < obj.N - 1 - count; k++) {
-							obj.p[i][k] = obj.p[i][k + 1];
-						}
-						obj.p[i][obj.N - 1 - count] = 0;
-					}
-				}
-			}
-			for (let j = 0; j < obj.N - 1; j++) {
-				if (obj.p[i][j] != 0 && obj.p[i][j] == obj.p[i][j + 1]) { //相邻的非零元素合并到一起，元素值加倍
-					obj.p[i][j] *= 2;
-					obj.score += obj.p[i][j]; //加分
-					for (let k = j + 1; k < obj.N - 1 - count; k++) {
-						obj.p[i][k] = obj.p[i][k + 1];
-					}
-					obj.p[i][obj.N - 1 - count] = 0;
-					break;
-				}
-			}
-		}
-	}
+  function left(game) {
+    for (let i = 0; i < game.N; i++) {
+      // 遍历每一行
+      let count = 0;
+      for (let j = 0; j < game.N - 1 - count; j++) {
+        // 遍历前N列
+        if (game.p[i][j] == 0) {
+          // 排除空白格子s
+          for (let k = j; k < game.N - 1 - count; k++) {
+            game.p[i][k] = game.p[i][k + 1];
+          }
+          game.p[i][game.N - 1 - count] = 0;
+          --j;
+          ++count;
+        } else {
+          if (game.p[i][j] == game.p[i][j + 1]) {
+            game.p[i][j] *= 2;
+            game.score += game.p[i][j]; //加分
+            for (let k = j + 1; k < game.N - 1 - count; k++) {
+              game.p[i][k] = game.p[i][k + 1];
+            }
+            game.p[i][game.N - 1 - count] = 0;
+          }
+        }
+      }
+      for (let j = 0; j < game.N - 1; j++) {
+        if (game.p[i][j] != 0 && game.p[i][j] == game.p[i][j + 1]) {
+          //相邻的非零元素合并到一起，元素值加倍
+          game.p[i][j] *= 2;
+          game.score += game.p[i][j]; //加分
+          for (let k = j + 1; k < game.N - 1 - count; k++) {
+            game.p[i][k] = game.p[i][k + 1];
+          }
+          game.p[i][game.N - 1 - count] = 0;
+          break;
+        }
+      }
+    }
+  }
 
-	function up(obj) {
-		for (let j = 0; j < obj.N; j++) { //
-			let count = 0;
-			for (let i = 0; i < obj.N - 1 - count; i++) { //
-				if (obj.p[i][j] == 0) { //
-					for (let k = i; k < obj.N - 1 - count; k++) {
-						obj.p[k][j] = obj.p[k + 1][j];
-					}
-					obj.p[obj.N - 1 - count][j] = 0;
-					--i;
-					++count;
-				} else {
-					if (obj.p[i][j] == obj.p[i + 1][j]) {
-						obj.p[i][j] *= 2;
-						obj.score += obj.p[i][j];
-						for (let k = i + 1; k < obj.N - 1 - count; k++) {
-							obj.p[k][j] = obj.p[k + 1][j];
-						}
-						obj.p[obj.N - 1 - count][j] = 0;
-					}
-				}
-			}
-			for (let i = 0; i < obj.N - 1; i++) {
-				if (obj.p[i][j] != 0 && obj.p[i][j] == obj.p[i + 1][j]) { //相邻的非零元素合并到一起，元素值加倍
-					obj.p[i][j] *= 2;
-					obj.score += obj.p[i][j];
-					for (let k = i + 1; k < obj.N - 1 - count; k++) {
-						obj.p[k][j] = obj.p[k + 1][j];
-					}
-					obj.p[obj.N - 1 - count][j] = 0;
-					break;
-				}
-			}
-		}
-	}
+  function up(game) {
+    for (let j = 0; j < game.N; j++) {
+      let count = 0;
+      for (let i = 0; i < game.N - 1 - count; i++) {
+        if (game.p[i][j] == 0) {
+          for (let k = i; k < game.N - 1 - count; k++) {
+            game.p[k][j] = game.p[k + 1][j];
+          }
+          game.p[game.N - 1 - count][j] = 0;
+          --i;
+          ++count;
+        } else {
+          if (game.p[i][j] == game.p[i + 1][j]) {
+            game.p[i][j] *= 2;
+            game.score += game.p[i][j];
+            for (let k = i + 1; k < game.N - 1 - count; k++) {
+              game.p[k][j] = game.p[k + 1][j];
+            }
+            game.p[game.N - 1 - count][j] = 0;
+          }
+        }
+      }
+      for (let i = 0; i < game.N - 1; i++) {
+        if (game.p[i][j] != 0 && game.p[i][j] == game.p[i + 1][j]) {
+          game.p[i][j] *= 2;
+          game.score += game.p[i][j];
+          for (let k = i + 1; k < game.N - 1 - count; k++) {
+            game.p[k][j] = game.p[k + 1][j];
+          }
+          game.p[game.N - 1 - count][j] = 0;
+          break;
+        }
+      }
+    }
+  }
 
-	function down(obj) {
-		for (let j = 0; j < obj.N; j++) { //
-			let count = 0;
-			for (let i = obj.N - 1; i > count; i--) {
-				if (obj.p[i][j] == 0) { //
-					for (let k = i; k > count; k--) {
-						obj.p[k][j] = obj.p[k - 1][j];
-					}
-					obj.p[count][j] = 0;
-					++i;
-					++count;
-				} else {
-					if (obj.p[i][j] == obj.p[i - 1][j]) {
-						obj.p[i][j] *= 2;
-						obj.score += obj.p[i][j];
-						for (let k = i - 1; k > count; k--) {
-							obj.p[k][j] = obj.p[k - 1][j];
-						}
-						obj.p[count][j] = 0;
-					}
-				}
-			}
-			for (let i = obj.N - 1; i > 0; i--) {
-				if (obj.p[i][j] != 0 && obj.p[i][j] == obj.p[i - 1][j]) { //相邻的非零元素合并到一起，元素值加倍
-					obj.p[i][j] *= 2;
-					obj.score += obj.p[i][j];
-					for (let k = i - 1; k > count; k--) {
-						obj.p[k][j] = obj.p[k - 1][j];
-					}
-					obj.p[count][j] = 0;
-					break;
-				}
-			}
-		}
-	}
+  function down(game) {
+    for (let j = 0; j < game.N; j++) {
+      let count = 0;
+      for (let i = game.N - 1; i > count; i--) {
+        if (game.p[i][j] == 0) {
+          for (let k = i; k > count; k--) {
+            game.p[k][j] = game.p[k - 1][j];
+          }
+          game.p[count][j] = 0;
+          ++i;
+          ++count;
+        } else {
+          if (game.p[i][j] == game.p[i - 1][j]) {
+            game.p[i][j] *= 2;
+            game.score += game.p[i][j];
+            for (let k = i - 1; k > count; k--) {
+              game.p[k][j] = game.p[k - 1][j];
+            }
+            game.p[count][j] = 0;
+          }
+        }
+      }
+      for (let i = game.N - 1; i > 0; i--) {
+        if (game.p[i][j] != 0 && game.p[i][j] == game.p[i - 1][j]) {
+          game.p[i][j] *= 2;
+          game.score += game.p[i][j];
+          for (let k = i - 1; k > count; k--) {
+            game.p[k][j] = game.p[k - 1][j];
+          }
+          game.p[count][j] = 0;
+          break;
+        }
+      }
+    }
+  }
 
-	function right(obj) {
-		for (let i = 0; i < obj.N; i++) { //
-			let count = 0;
-			for (let j = obj.N - 1; j > count; j--) { //
-				if (obj.p[i][j] == 0) { //
-					for (let k = j; k > count; k--) {
-						obj.p[i][k] = obj.p[i][k - 1];
-					}
-					obj.p[i][count] = 0;
-					++j;
-					++count;
-				} else {
-					if (obj.p[i][j] == obj.p[i][j - 1]) {
-						obj.p[i][j] *= 2;
-						obj.score += obj.p[i][j];
-						for (let k = j - 1; k > count; k--) {
-							obj.p[i][k] = obj.p[i][k - 1];
-						}
-						obj.p[i][count] = 0;
-					}
-				}
-			}
-			for (let j = obj.N - 1; j > 0; j--) {
-				if (obj.p[i][j] != 0 && obj.p[i][j] == obj.p[i][j - 1]) { //相邻的非零元素合并到一起，元素值加倍
-					obj.p[i][j] *= 2;
-					obj.score += obj.p[i][j];
-					for (let k = j - 1; k > count; k--) {
-						obj.p[i][k] = obj.p[i][k - 1];
-					}
-					obj.p[i][count] = 0;
-					break;
-				}
-			}
-		}
-	}
-	return {
-		left,
-		right,
-		up,
-		downn
-	};
+  function right(game) {
+    for (let i = 0; i < game.N; i++) {
+      let count = 0;
+      for (let j = game.N - 1; j > count; j--) {
+        if (game.p[i][j] == 0) {
+          //
+          for (let k = j; k > count; k--) {
+            game.p[i][k] = game.p[i][k - 1];
+          }
+          game.p[i][count] = 0;
+          ++j;
+          ++count;
+        } else {
+          if (game.p[i][j] == game.p[i][j - 1]) {
+            game.p[i][j] *= 2;
+            game.score += game.p[i][j];
+            for (let k = j - 1; k > count; k--) {
+              game.p[i][k] = game.p[i][k - 1];
+            }
+            game.p[i][count] = 0;
+          }
+        }
+      }
+      for (let j = game.N - 1; j > 0; j--) {
+        if (game.p[i][j] != 0 && game.p[i][j] == game.p[i][j - 1]) {
+          game.p[i][j] *= 2;
+          game.score += game.p[i][j];
+          for (let k = j - 1; k > count; k--) {
+            game.p[i][k] = game.p[i][k - 1];
+          }
+          game.p[i][count] = 0;
+          break;
+        }
+      }
+    }
+  }
+
+  return {
+    left,
+    right,
+    up,
+    down,
+  };
 });

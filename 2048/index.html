@@ -2,11 +2,16 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>2048 game</title>
+    <title>2048</title>
     <link rel="stylesheet" href="css/index.css" />
   </head>
   <body>
-    <div class="name"><h1>2048 by GL</h1></div>
+    <div class="name">
+      <span class="two">2</span>
+      <span class="zero">0</span>
+      <span class="four">4</span>
+      <span class="eight">8</span>
+    </div>
     <div class="box">
       <li class="grid1"></li>
       <li class="grid2"></li>
@@ -25,10 +30,10 @@
       <li class="grid15"></li>
       <li class="grid16"></li>
     </div>
-    <span>controls: ↑/↓/←/→</span>
-    <span class="score">score: 0</span>
-    <span class="player">player: gl</span>
-    <span class="record">record: 0 by gl</span>
+    <div class="controls">controls: ↑/↓/←/→</div>
+    <div class="score">score: 0</div>
+    <div class="player">player: gl</div>
+    <div class="record">record: 0 by gl</div>
   </body>
   <script src="./js/lib/require.js" data-main="./main.js"></script>
 </html>
