@@ -4,68 +4,63 @@
 }
 
 body {
-    overflow: hidden;
-    perspective: 1000px;
+    /* overflow: hidden; */
+    /* perspective: 1000px; */
     transform: scale(1);
 }
 
 .title {
     text-align: center;
-    margin-top: 20px;
+    margin-top: 50px;
 }
 
 .box {
-    width: 600px;
-    height: 400px;
+    width: 800px;
+    height: 600px;
     background-color: skyblue;
     position: relative;
-    margin: 10px auto;
-    /*border-radius: 2em;*/
+    margin: 0 auto;
+    border-radius: 1em;
     transform: rotateX(30deg);
     /*transform-style: preserve-3d;*/
 }
 
-/*        .box div{
-    transform: translateZ(20px);
-}*/
 /*蛇的一部分*/
 .head {
     width: 20px;
     height: 20px;
     position: absolute;
-    /*left: 100px;*/
-    left: 600px;
+    left: 800px;
     top: 100px;
     background-color: orange;
     background: radial-gradient(circle at center, rgba(255, 0, 0, 0), rgba(255, 0, 0, .2), rgba(255, 0, 0, .4), rgba(255, 0, 0, .6), rgba(255, 0, 0, .8), rgba(255, 0, 0, 1));
     border-radius: 50%;
-    transform: scale(1.4, 1.4);
+    transform: scale(1.2, 1.2);
 }
 
 @keyframes fate {
     0% {
-        transform: rotateY(0) scale(1);
+        transform: scale(1.2);
     }
 
     50% {
-        transform: rotateY(360deg) scale(2);
+        transform: scale(1.6);
     }
 
     100% {
-        transform: rotateY(0) scale(1);
+        transform: scale(1.2);
     }
 }
 
 .animation {
-    animation: linear 4s 0s fate infinite;
+    animation: ease-in-out 1.6s 0s fate infinite;
 }
 
 .food {
     width: 20px;
     height: 20px;
     position: absolute;
-    /*left: 200px;*/
-    left: 300px;
+    left: 400px;
     top: 100px;
     background-color: purple;
     border-radius: 30px;
@@ -73,11 +68,17 @@ body {
 
 .info {
     text-align: left;
-    width: 600px;
-    margin: 0 auto;
+    width: 800px;
+    margin: 0 auto 40px;
 }
 
 .info>.mode {
-    text-align: left;
+    position: relative;
+    top: -20px;
+    text-align: right;
     font: bolder 20px/24px 'microsoft yahei';
+}
+
+.info .operate {
+    font-weight: 600;
 }

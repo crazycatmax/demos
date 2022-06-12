@@ -1,42 +1,52 @@
-define(['tools'], function (tools) {
-	//游戏是否结束
-	function foo(o) {
-		return whetherCrashSelf(o) || whetherCrashBoundry(o);
-	}
+define(["tools"], function (tools) {
+  const { getStyle } = tools;
 
-	//头部是否碰撞自己
-	function whetherCrashSelf(o) {
-		let parts = o.snake.parts;
-		let head = parts[0];
-		let flag = false; //默认没有碰撞自己
-		for (let i = 1; i < parts.length; i++) {
-			if (head.style.left == parts[i].style.left && head.style.top == parts[i].style.top) {
-				flag = true;
-				break;
-			}
-		}
-		return flag;
-	}
+  // 游戏是否结束
+  function over(game) {
+    return whetherCrashSelf(game) || whetherCrashBoundry(game);
+  }
 
-	//头部是否出界
-	function whetherCrashBoundry(o) {
-		let flag = false; //默认没有出界
-		//碰到右边界
-		if ((parseInt(tools.getStyle(o.snake.parts[0], 'left')) > o.box.offsetWidth - o.snake.width)
-			//碰到左边界
-			||
-			(parseInt(tools.getStyle(o.snake.parts[0], 'left')) < 0)
-			//碰到下边界
-			||
-			(parseInt(tools.getStyle(o.snake.parts[0], 'top')) > o.box.offsetHeight - o.snake.width)
-			//碰到上边界
-			||
-			(parseInt(tools.getStyle(o.snake.parts[0], 'top')) < 0)) {
-			flag = true;
-		}
-		return flag;
-	}
-	return {
-		over: foo
-	}
-})
+  // 头部是否碰撞自己
+  function whetherCrashSelf(game) {
+    const { parts } = game.snake;
+    const snakeHead = parts[0];
+    let flag = false; // 默认没有碰撞自己
+    for (const part of parts.slice(1)) {
+      const horizontalCrashed = snakeHead.style.left === part.style.left;
+      const verticalCrashed = snakeHead.style.top === part.style.top;
+      if (horizontalCrashed && verticalCrashed) {
+        flag = true;
+        break;
+      }
+    }
+    return flag;
+  }
+
+  // 头部是否出界
+  function whetherCrashBoundry(game) {
+    let flag = false; // 默认未出界
+    const headPos = {
+      leftMin: 0,
+      topMin: 0,
+      leftMax: game.box.offsetWidth - game.snake.width,
+      topMax: game.box.offsetHeight - game.snake.width,
+    };
+    const snakeHead = game.snake.parts[0];
+    const crashBoundary = {
+      right: parseInt(getStyle(snakeHead, "left")) > headPos.leftMax,
+      left: parseInt(getStyle(snakeHead, "left")) < headPos.leftMin,
+      down: parseInt(getStyle(snakeHead, "top")) > headPos.topMax,
+      up: parseInt(getStyle(snakeHead, "top")) < headPos.topMin,
+    };
+    const crashed =
+      crashBoundary.right ||
+      crashBoundary.left ||
+      crashBoundary.down ||
+      crashBoundary.up;
+    if (crashed) flag = true;
+    return flag;
+  }
+  return {
+    over,
+  };
+});

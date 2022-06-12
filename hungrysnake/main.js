@@ -1,13 +1,12 @@
 require.config({
-	baseUrl: 'js',
-	paths: {}
+  baseUrl: "js",
+  paths: {},
 });
 
-require(['start', 'listen'], function (start, listen) {
-	const o = {};
+require(["start", "monitor"], function (start, monitor) {
+  const game = {};
 
-	start.init(o); //初始化游戏
+  start.init(game); //初始化游戏
 
-	listen.init(o); //添加键盘鼠标事件
-
+  monitor.init(game); //添加键盘鼠标事件
 });

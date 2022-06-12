@@ -1,10 +1,10 @@
-define(["tools", "direction"], function (tools, dirt) {
-  const keyboardMap = {
-    LEFT: 37,
-    UP: 38,
-    RIGHT: 39,
-    DOWN: 40,
-  };
+define(["tools", "direction", "constant"], function (
+  tools,
+  directionAction,
+  dataMap
+) {
+  const { judge, initial, start, myEquals, randomNext, display } = tools;
+  const { keyboardMap } = dataMap;
   function $(selector) {
     return document.querySelector(selector);
   }
@@ -26,19 +26,19 @@ define(["tools", "direction"], function (tools, dirt) {
     document.addEventListener("mouseleave", handlerLeave);
 
     function directionHandler(direction) {
-      dirt[direction](game);
-      tools.judge(game);
+      directionAction[direction](game);
+      judge(game);
       if (game.endflag) {
-        tools.initial(game);
-        tools.start(game);
+        initial(game);
+        start(game);
         return;
       }
-      if (!tools.myEquals(game.p, game.previous)) {
-        tools.randomNext(game);
+      if (!myEquals(game.p, game.previous)) {
+        randomNext(game);
       }
-      tools.display(game);
+      display(game);
     }
-    
+
     //监听键盘事件
     document.addEventListener(
       "keyup",
