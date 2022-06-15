@@ -10,7 +10,7 @@ li {
 .box {
     width: 800px;
     height: 500px;
-    margin: 20px auto 0;
+    margin: 40px auto 0;
     background-color: #eee;
     position: relative;
 }
@@ -40,11 +40,34 @@ li {
     top: 0;
 }
 
+.control{
+    width: 800px;
+    margin: 20px auto 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sel {
+    position: relative;
+    padding: 5px;
+    border-radius: 2px;
+}
+
+.sel .optionStyle {
+    background-color: #ddd;
+}
+
+.size {
+    position: relative;
+}
+.size .in{
+    width: 20px;
+}
+
 .btn {
-    /*float: left;*/
     display: inline-block;
     position: relative;
-    left: 65%;
     padding: 20px;
     color: purple;
     border: 2px solid purple;
@@ -58,28 +81,4 @@ li {
     color: #fff;
     border: 2px solid #fff;
     background-color: purple;
-}
-
-.sel {
-    /*float: left;*/
-    display: inline-block;
-    position: relative;
-    top: -10px;
-    left: 10.5%;
-    padding: 5px;
-    border-radius: 5px;
-}
-
-.sel .optionStyle {
-    background-color: #ddd;
-}
-.size {
-    display: inline-block;
-    position: relative;
-    left: 10.5%;
-    width: 20%;
-    /*background-color: pink;*/
-}
-.size .in{
-    width: 30px;
 }

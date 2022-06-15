@@ -91,23 +91,22 @@ function btnClickHandler() {
   // 依次给每个方块设置延迟
   for (let i = 0; i < m * n; i++) {
     let li = $("li" + (i + 1)); // 目标方块元素
-    setTimeout(
-      function () {
-        animate(
-          li,
-          {
-            opacity: 1.0,
-          },
-          function () {
-            throttleFlag[i] = true; // 打开每个小方格的节流阀
-            if (getAndValue(throttleFlag)) exchange(); // 如果节流阀全部打开,变换图片
-          }
-        );
-      },
+    let delayLi =
       selIndex == -1
         ? style(li.x, li.y, m, n, index % 21) // 根据行列号确定延迟时间
-        : style(li.x, li.y, m, n, selIndex)
-    );
+        : style(li.x, li.y, m, n, selIndex);
+    setTimeout(function () {
+      animate(
+        li,
+        {
+          opacity: 1.0,
+        },
+        function () {
+          throttleFlag[i] = true; // 打开小方格的节流阀
+          if (getAndValue(throttleFlag)) exchange(); // 如果节流阀全部打开,变换图片
+        }
+      );
+    }, delayLi);
     // },style(li.x,li.y,m,n,index%21));
     // },style(li.x,li.y,m,n,20));
     // },500);
@@ -115,7 +114,7 @@ function btnClickHandler() {
 
   // 变换图片
   function exchange() {
-    // 设置小方块效果结束时的动作, 外层大图变为小方格的图
+    // 设置小方块效果结束时的动作,外层大图变为小方格的图
     $("img").setAttribute("src", "img/" + (((index + 1) % 9) + 1) + ".jpg");
 
     // 小方格变透明,并且切换为下一张图
@@ -305,9 +304,9 @@ function getStyle(obj, attr) {
 // 删除并返回数组的随机元素
 function removeRandomItem(arr) {
   const randomIndex = parseInt(Math.random() * arr.length); // 随机位置
-  const item = arr[randomIndex]; // 随机元素
+  const result = arr[randomIndex]; // 随机元素
   arr.splice(randomIndex, 1);
-  return item;
+  return result;
 }
 
 // 动画函数
@@ -321,7 +320,7 @@ function animate(obj, json, fn) {
         leader = getStyle(obj, k) * 100;
         target = json[k] * 100;
         step = (target - leader) / 10;
-        step = step > 0 ? Math.ceil(step) : Math.floor(step);
+        step = step > 0 ? Math.ceil(step) : Math.floor(step); // 步数矫正
         leader = leader + step;
         obj.style[k] = leader / 100; // opacity没有单位
       } else if (k === "zIndex") {
@@ -340,6 +339,6 @@ function animate(obj, json, fn) {
     }
     if (!flag) return;
     clearInterval(obj.timer);
-    if (fn) fn();
+    fn && fn();
   }, 15);
 }
